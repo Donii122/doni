@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact BeniChem - Get in touch with our team for industrial equipment, cleaning supplies, and professional equipment inquiries.">
+    <meta name="keywords" content="contact benichem, industrial equipment support, cleaning supplies help">
+    <meta property="og:title" content="Contact BeniChem">
+    <meta property="og:description" content="Get in touch with BeniChem for all your industrial and cleaning supply needs">
+    <meta property="og:type" content="website">
+    <title>Contact BeniChem - Industrial & Cleaning Supplies</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .contact-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-form, .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-form h2, .contact-info h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #007cba;
+            box-shadow: 0 0 5px rgba(0,124,186,0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: #007cba;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #005a87;
+            transform: translateY(-2px);
+        }
+
+        .contact-info-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .contact-info-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-info-item h3 {
+            color: #007cba;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .contact-info-item a {
+            color: #007cba;
+            text-decoration: none;
+        }
+
+        .contact-info-item a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                margin: 40px auto;
+            }
+        }
+
+        .success-message {
+            display: none;
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="logo" style="display: flex; align-items: center; gap: 10px;">
+                        <img loading="lazy" src="https://tse4.mm.bing.net/th/id/OIP.U_VcHSF9y-ucte7Oc5bB5gHaGq?rs=1&pid=ImgDetMain&o=7&rm=3" alt="BeniChem Logo" style="height: 2.5rem; width: auto; object-fit: contain; vertical-align: middle;">
+                        <h1><a href="index.html" style="text-decoration: none; color: inherit;">BeniChem</a></h1>
+                    </div>
+                    <div class="header-actions">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search this website..." id="searchInput">
+                            <button type="button" onclick="filterProducts()"><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="cart-info">
+                            <div class="cart-total-display" id="cartTotalHeader">£0.00</div>
+                            <div class="cart-icon" id="cartIcon" onclick="toggleCart()">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count" id="cartCount">0</span>
+                            </div>
+                        </div>
+                        <div class="user-actions">
+                            <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navMenu" onclick="toggleMenu()">
+                                <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+                                <span class="sr-only">Open menu</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="index.html" class="nav-link anim-text">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link anim-text">Products <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-content">
+                                <div class="dropdown-column">
+                                    <h3>Industrial Equipment</h3>
+                                    <ul>
+                                        <li><a href="col1-industrial.html">Air Fresheners</a></li>
+                                        <li><a href="col1-industrial.html">Couplings & Housings</a></li>
+                                        <li><a href="col1-industrial.html">Electric Motors</a></li>
+                                        <li><a href="col1-industrial.html">Electricals</a></li>
+                                        <li><a href="col1-industrial.html">Low Pressure Hose</a></li>
+                                        <li><a href="col1-industrial.html">Pressure Switches</a></li>
+                                        <li><a href="col1-industrial.html">Petrol Engine Pressure Washers</a></li>
+                                        <li><a href="col1-industrial.html">Silicones</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h3>Cleaning Supplies</h3>
+                                    <ul>
+                                        <li><a href="col2-cleaning.html">Chemicals</a></li>
+                                        <li><a href="col2-cleaning.html">Trigger Guns</a></li>
+                                        <li><a href="col2-cleaning.html">Triggers and Lances</a></li>
+                                        <li><a href="col2-cleaning.html">Unloader Valves</a></li>
+                                        <li><a href="col2-cleaning.html">Vacuums & Spares</a></li>
+                                        <li><a href="col2-cleaning.html">Filters</a></li>
+                                        <li><a href="col2-cleaning.html">Fuel Nozzles</a></li>
+                                        <li><a href="col2-cleaning.html">Jet Wash Hose Assemblies</a></li>
+                                        <li><a href="col2-cleaning.html">Jetwash Nozzles</a></li>
+                                        <li><a href="col2-cleaning.html">Lances</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h3>Professional Equipment</h3>
+                                    <ul>
+                                        <li><a href="col3-professional.html">Pressure Washer Trolleys & Spares</a></li>
+                                        <li><a href="col3-professional.html">Pump Spares</a></li>
+                                        <li><a href="col3-professional.html">Reduction Gearboxes</a></li>
+                                        <li><a href="col3-professional.html">Staff Uniform</a></li>
+                                        <li><a href="col3-professional.html">Jetwash Pumps</a></li>
+                                        <li><a href="col3-professional.html">Tanks Frames & Holders</a></li>
+                                        <li><a href="col3-professional.html">Hydraulic Adaptors</a></li>
+                                        <li><a href="col3-professional.html">Interpump Spares</a></li>
+                                        <li><a href="col3-professional.html">Accessories</a></li>
+                                        <li><a href="col3-professional.html">Interpumps</a></li>
+                                        <li><a href="col3-professional.html">Polish and Mopping Machines</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link anim-text">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Sidebar -->
+        <div class="cart-sidebar" id="cartSidebar" aria-hidden="true" role="dialog" aria-label="Shopping cart">
+            <div class="cart-header">
+                <h3>Cart</h3>
+                <button class="close-cart" onclick="toggleCart()" aria-label="Close cart">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total: <span id="cartTotal">£0.00</span></span>
+                </div>
+                <button class="checkout-btn" onclick="goToCheckout()">Checkout</button>
+            </div>
+        </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h1 style="text-align: center; margin-bottom: 40px; color: #2c3e50;">Contact BeniChem</h1>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <h2>Send us a Message</h2>
+                    <div id="successMessage" class="success-message">
+                        Thank you! Your message has been sent successfully.
+                    </div>
+                    <form id="contactForm" onsubmit="sendContactForm(event)">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <h2>Contact Information</h2>
+                    <div class="contact-info-item">
+                        <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                        <p>BeniChem Industrial Supplies<br>123 Industrial Park<br>Business City, BC 12345<br>United Kingdom</p>
+                    </div>
+                    <div class="contact-info-item">
+                        <h3><i class="fas fa-phone"></i> Phone</h3>
+                        <p><a href="tel:+441234567890">+44 (0)1234 567890</a></p>
+                        <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+                    </div>
+                    <div class="contact-info-item">
+                        <h3><i class="fas fa-envelope"></i> Email</h3>
+                        <p><a href="mailto:info@benichem.com">info@benichem.com</a></p>
+                        <p><a href="mailto:sales@benichem.com">sales@benichem.com</a></p>
+                        <p><a href="mailto:support@benichem.com">support@benichem.com</a></p>
+                    </div>
+                    <div class="contact-info-item">
+                        <h3><i class="fas fa-globe"></i> Follow Us</h3>
+                        <p>
+                            <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook" style="color: #007cba; margin-right: 10px;"></i></a>
+                            <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram" style="color: #007cba; margin-right: 10px;"></i></a>
+                            <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin" style="color: #007cba; margin-right: 10px;"></i></a>
+                            <a href="https://twitter.com" target="_blank" title="Twitter"><i class="fab fa-twitter" style="color: #007cba;"></i></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product Categories</h4>
+                    <ul>
+                        <li><a href="col1-industrial.html">Industrial Equipment</a></li>
+                        <li><a href="col2-cleaning.html">Cleaning Supplies</a></li>
+                        <li><a href="col3-professional.html">Professional Equipment</a></li>
+                        <li><a href="index.html#products">All Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="index.html#products">Featured Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Technical Support</a></li>
+                        <li><a href="#">Installation Guide</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://twitter.com" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <h5>Subscribe to our newsletter</h5>
+                        <div class="newsletter-form">
+                            <input type="email" id="newsletterEmail" placeholder="Enter your email">
+                            <button type="button" onclick="subscribeNewsletter()">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 BeniChem. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="cookie-policy.html">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function sendContactForm(event) {
+            event.preventDefault();
+            const form = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
+
+            // Replace YOUR_FORMSPREE_ID with your actual Formspree form ID or point to your own backend endpoint
+            const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+
+            const formData = new FormData(form);
+
+            // Local message backup removed — messages are no longer stored locally for security reasons.
+
+            fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: formData
+            }).then(async response => {
+                if (response.ok) {
+                    // Success
+                    successMessage.classList.add('show');
+
+                    form.reset();
+                    setTimeout(() => successMessage.classList.remove('show'), 5000);
+                } else {
+                    // Try to parse error details
+                    const data = await response.json().catch(() => ({}));
+                    alert('Sorry, there was a problem sending your message. Please try again later or email info@benichem.com');
+                    console.error('Contact form error', data);
+                }
+            }).catch(err => {
+                console.error('Contact form error:', err);
+                alert('Network error. Please try again later or email info@benichem.com');
+            });
+        }
+
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletterEmail').value;
+            if (email) {
+                const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+                const data = new FormData();
+                data.append('email', email);
+                data.append('_subject', 'Newsletter Subscription');
+                fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: data
+                }).then(response => {
+                    if (response.ok) {
+                        document.getElementById('newsletterEmail').value = '';
+                        alert('Thank you for subscribing!');
+                    } else {
+                        alert('Subscription failed. Please try again.');
+                    }
+                }).catch(err => {
+                    console.error('Newsletter subscribe error:', err);
+                    alert('Network error. Please try again.');
+                });
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

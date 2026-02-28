@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure checkout for BeniChem products. Fast and easy payment processing for your industrial and cleaning supplies.">
+    <meta name="robots" content="noindex, follow">
+    <title>Checkout - BeniChem</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX'); // Replace XXXXXXXXXX with your Google Analytics ID
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+        .checkout-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+        
+        .checkout-form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .order-summary {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #007cba;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0,124,186,0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+        
+        .order-item:hover {
+            background: #f8f9fa;
+            padding-left: 10px;
+            border-radius: 4px;
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .order-item-info {
+            flex: 1;
+        }
+        
+        .order-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .order-item-details {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .order-item-price {
+            font-weight: 600;
+            color: #007cba;
+        }
+        
+        .order-totals {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #007cba;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 16px;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .total-row:hover {
+            background: #f8f9fa;
+            padding-left: 10px;
+            border-radius: 4px;
+        }
+        
+        .total-row.final {
+            font-size: 24px;
+            font-weight: 700;
+            color: #007cba;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #007cba;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .payment-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #007cba 0%, #005a8a 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,124,186,0.3);
+        }
+        
+        .payment-btn:hover {
+            background: linear-gradient(135deg, #005a8a 0%, #003d5c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,124,186,0.4);
+        }
+        
+        .payment-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #007cba 0%, #005a8a 100%);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        
+        .empty-cart-message {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .empty-cart-message h2 {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .empty-cart-message a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #007cba 0%, #005a8a 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,124,186,0.3);
+        }
+        
+        .empty-cart-message a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,124,186,0.4);
+        }
+        
+        @media (max-width: 968px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-summary {
+                position: static;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="logo" style="display: flex; align-items: center; gap: 10px;">
+                        <img loading="lazy" src="https://tse4.mm.bing.net/th/id/OIP.U_VcHSF9y-ucte7Oc5bB5gHaGq?rs=1&pid=ImgDetMain&o=7&rm=3" alt="BeniChem Logo" style="height: 2.5rem; width: auto; object-fit: contain; vertical-align: middle;">
+                        <h1>BeniChem</h1>
+                    </div>
+                    <div class="header-actions">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search this website..." id="searchInput">
+                            <button type="button" onclick="filterProducts()"><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="cart-info">
+                            <div class="cart-total-display" id="cartTotalHeader">£0.00</div>
+                            <div class="cart-icon" id="cartIcon" onclick="toggleCart()">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count" id="cartCount">0</span>
+                            </div>
+                        </div>
+                        <div class="user-actions">
+                            <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navMenu" onclick="toggleMenu()">
+                                <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+                                <span class="sr-only">Open menu</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="index.html" class="nav-link anim-text">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link anim-text">Products <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-content">
+                                <div class="dropdown-column">
+                                    <h3>Industrial Equipment</h3>
+                                    <ul>
+                                        <li><a href="col1-industrial.html">Air Fresheners</a></li>
+                                        <li><a href="col1-industrial.html">Couplings & Housings</a></li>
+                                        <li><a href="col1-industrial.html">Electric Motors</a></li>
+                                        <li><a href="col1-industrial.html">Electricals</a></li>
+                                        <li><a href="col1-industrial.html">Low Pressure Hose</a></li>
+                                        <li><a href="col1-industrial.html">Pressure Switches</a></li>
+                                        <li><a href="col1-industrial.html">Petrol Engine Pressure Washers</a></li>
+                                        <li><a href="col1-industrial.html">Silicones</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h3>Cleaning Supplies</h3>
+                                    <ul>
+                                        <li><a href="col2-cleaning.html">Chemicals</a></li>
+                                        <li><a href="col2-cleaning.html">Trigger Guns</a></li>
+                                        <li><a href="col2-cleaning.html">Triggers and Lances</a></li>
+                                        <li><a href="col2-cleaning.html">Unloader Valves</a></li>
+                                        <li><a href="col2-cleaning.html">Vacuums & Spares</a></li>
+                                        <li><a href="col2-cleaning.html">Filters</a></li>
+                                        <li><a href="col2-cleaning.html">Fuel Nozzles</a></li>
+                                        <li><a href="col2-cleaning.html">Jet Wash Hose Assemblies</a></li>
+                                        <li><a href="col2-cleaning.html">Jetwash Nozzles</a></li>
+                                        <li><a href="col2-cleaning.html">Lances</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h3>Professional Equipment</h3>
+                                    <ul>
+                                        <li><a href="col3-professional.html">Pressure Washer Trolleys & Spares</a></li>
+                                        <li><a href="col3-professional.html">Pump Spares</a></li>
+                                        <li><a href="col3-professional.html">Reduction Gearboxes</a></li>
+                                        <li><a href="col3-professional.html">Staff Uniform</a></li>
+                                        <li><a href="col3-professional.html">Jetwash Pumps</a></li>
+                                        <li><a href="col3-professional.html">Tanks Frames & Holders</a></li>
+                                        <li><a href="col3-professional.html">Hydraulic Adaptors</a></li>
+                                        <li><a href="col3-professional.html">Interpump Spares</a></li>
+                                        <li><a href="col3-professional.html">Accessories</a></li>
+                                        <li><a href="col3-professional.html">Interpumps</a></li>
+                                        <li><a href="col3-professional.html">Polish and Mopping Machines</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link anim-text">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar" aria-hidden="true" role="dialog" aria-label="Shopping cart">
+        <div class="cart-header">
+            <h3>Cart</h3>
+            <button class="close-cart" onclick="toggleCart()" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total: <span id="cartTotal">£0.00</span></span>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()">Checkout</button>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="checkout-container" id="checkoutContainer">
+            <!-- Checkout Form -->
+            <div class="checkout-form">
+                <h2 class="section-title">Checkout</h2>
+                <p style="margin-bottom: 30px; color: #666;">Complete your purchase with secure payment</p>
+                
+                <form id="checkoutForm">
+                    <h3 style="margin-bottom: 20px; color: #2c3e50;">Contact Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="name.surname@example.com" required autocomplete="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+44 1234 567890" required autocomplete="tel">
+                    </div>
+                    
+                    <h3 style="margin: 30px 0 20px 0; color: #2c3e50;">Shipping Address</h3>
+                    
+                    <div class="form-group">
+                        <label for="fullName">Full Name (Name Surname) *</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Name Surname" required autocomplete="name" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ' -]+ [A-Za-zÀ-ÖØ-öø-ÿ' -]+$" title="Please enter your full name (first and last name at minimum). Hyphens and apostrophes allowed">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Address *</label>
+                        <input type="text" id="address" name="address" placeholder="123 Business Street" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" placeholder="London" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postcode">Postcode *</label>
+                            <input type="text" id="postcode" name="postcode" placeholder="SW1A 1AA" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="country">Country *</label>
+                        <select id="country" name="country" required>
+                            <option value="">Select Country</option>
+                            <option value="UK" selected>United Kingdom</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="AU">Australia</option>
+                            <option value="DE">Germany</option>
+                            <option value="FR">France</option>
+                            <option value="IT">Italy</option>
+                            <option value="ES">Spain</option>
+                        </select>
+                    </div>
+                    
+                    <h3 style="margin: 30px 0 20px 0; color: #2c3e50;">Payment Method</h3>
+                    
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 15px; border: 2px solid #e1e5e9; border-radius: 8px; margin-bottom: 10px; transition: all 0.3s ease; background: #f8f9fa;">
+                            <input type="radio" name="paymentMethod" value="card" id="paymentCard" required style="width: auto; margin: 0;">
+                            <div style="flex: 1;">
+                                <strong style="color: #007cba;"><i class="fas fa-credit-card" style="margin-right: 8px;"></i>Credit/Debit Card</strong>
+                                <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Pay securely with card</p>
+                            </div>
+                        </label>
+                        
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 15px; border: 2px solid #e1e5e9; border-radius: 8px; margin-bottom: 10px; transition: all 0.3s ease; background: #f8f9fa;">
+                            <input type="radio" name="paymentMethod" value="cod" id="paymentCOD" required style="width: auto; margin: 0;">
+                            <div style="flex: 1;">
+                                <strong style="color: #28a745;"><i class="fas fa-truck" style="margin-right: 8px;"></i>Cash on Delivery</strong>
+                                <p style="margin: 5px 0 0 0; font-size: 14px; color: #666;">Pay when you receive</p>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div id="cardDetails" style="display: none;">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number *</label>
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" autocomplete="cc-number" inputmode="numeric">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardName">Name on Card (Name Surname) *</label>
+                            <input type="text" id="cardName" name="cardName" placeholder="Name Surname" autocomplete="cc-name" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ' -]+ [A-Za-zÀ-ÖØ-öø-ÿ' -]+$" title="Please enter the name on card (first and last name at minimum). Hyphens and apostrophes allowed">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date *</label>
+                                <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5" autocomplete="cc-exp" inputmode="numeric" pattern="(0[1-9]|1[0-2])\/[0-9]{2}" title="Format: MM/YY (e.g., 12/25)">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV *</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" autocomplete="cc-csc" inputmode="numeric" pattern="[0-9]{3,4}" title="Enter 3 or 4 digit CVV">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="payment-btn" id="submitBtn">
+                        <i class="fas fa-lock"></i> Place Order
+                    </button>
+                    <p style="text-align: center; margin-top: 5px; font-size: 14px; color: #666;">
+                        <i class="fas fa-shield-alt"></i> Your payment information is secure and encrypted
+                    </p>
+                </form>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h2 class="section-title">Order Summary</h2>
+                <div id="orderItems">
+                    <!-- Order items will be loaded here -->
+                </div>
+                <div class="order-totals" id="orderTotals">
+                    <!-- Totals will be calculated here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Empty Cart Message -->
+        <div class="empty-cart-message" id="emptyCartMessage" style="display: none;">
+            <h2>Your cart is empty</h2>
+            <p>Please add items to your cart before proceeding to checkout.</p>
+            <a href="index.html">Continue Shopping</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product Categories</h4>
+                    <ul>
+                        <li><a href="col1-industrial.html">Industrial Equipment</a></li>
+                        <li><a href="col2-cleaning.html">Cleaning Supplies</a></li>
+                        <li><a href="col3-professional.html">Professional Equipment</a></li>
+                        <li><a href="index.html#products">All Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="index.html#products">Featured Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Technical Support</a></li>
+                        <li><a href="#">Installation Guide</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <h5>Subscribe to our newsletter</h5>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Enter your email">
+                            <button type="button" onclick="subscribeNewsletter()">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 BeniChem. All rights reserved.</p>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="cookie-policy.html">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Ensure cart is accessible
+        let checkoutCart = [];
+        
+        // Load cart and display order summary
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for script.js to load, then sync cart
+            setTimeout(function() {
+                // Load cart using script.js function if available
+                if (typeof loadCartFromStorage === 'function') {
+                    loadCartFromStorage();
+                }
+                
+                // Get cart from script.js global variable
+                if (typeof window.cart !== 'undefined' && window.cart.length > 0) {
+                    checkoutCart = window.cart;
+                } else {
+                    // Fallback: load from localStorage
+                    try {
+                        const savedCart = localStorage.getItem('benichem_cart');
+                        if (savedCart) {
+                            checkoutCart = JSON.parse(savedCart);
+                            // Sync with script.js
+                            if (typeof window.cart !== 'undefined') {
+                                window.cart = checkoutCart;
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Error loading cart:', e);
+                    }
+                }
+                
+                // Override script.js functions to update order summary when cart changes
+                if (typeof window.updateCartQuantity === 'function') {
+                    const originalUpdateCartQuantity = window.updateCartQuantity;
+                    window.updateCartQuantity = function(productId, newQuantity) {
+                        originalUpdateCartQuantity(productId, newQuantity);
+                        setTimeout(displayOrderSummary, 100);
+                    };
+                }
+                
+                if (typeof window.removeFromCart === 'function') {
+                    const originalRemoveFromCart = window.removeFromCart;
+                    window.removeFromCart = function(productId) {
+                        originalRemoveFromCart(productId);
+                        setTimeout(displayOrderSummary, 100);
+                    };
+                }
+                
+                // Update cart display using script.js function
+                if (typeof updateCartDisplay === 'function') {
+                    updateCartDisplay();
+                }
+                
+                // Display order summary
+                displayOrderSummary();
+                
+                // Show/hide card details based on payment method
+                const paymentCard = document.getElementById('paymentCard');
+                const paymentCOD = document.getElementById('paymentCOD');
+                const cardDetails = document.getElementById('cardDetails');
+                
+                function updatePaymentMethod() {
+                    if (paymentCard && paymentCard.checked) {
+                        if (cardDetails) cardDetails.style.display = 'block';
+                        const cardNumber = document.getElementById('cardNumber');
+                        const cardName = document.getElementById('cardName');
+                        const expiryDate = document.getElementById('expiryDate');
+                        const cvv = document.getElementById('cvv');
+                        if (cardNumber) cardNumber.required = true;
+                        if (cardName) cardName.required = true;
+                        if (expiryDate) expiryDate.required = true;
+                        if (cvv) cvv.required = true;
+                    } else {
+                        if (cardDetails) cardDetails.style.display = 'none';
+                        const cardNumber = document.getElementById('cardNumber');
+                        const cardName = document.getElementById('cardName');
+                        const expiryDate = document.getElementById('expiryDate');
+                        const cvv = document.getElementById('cvv');
+                        if (cardNumber) cardNumber.required = false;
+                        if (cardName) cardName.required = false;
+                        if (expiryDate) expiryDate.required = false;
+                        if (cvv) cvv.required = false;
+                    }
+                }
+                
+                if (paymentCard) paymentCard.addEventListener('change', updatePaymentMethod);
+                if (paymentCOD) paymentCOD.addEventListener('change', updatePaymentMethod);
+                
+                // Initialize payment method on page load
+                updatePaymentMethod();
+                
+                // Format card number (only if element exists)
+                const cardNumberInput = document.getElementById('cardNumber');
+                if (cardNumberInput) {
+                    cardNumberInput.addEventListener('input', function(e) {
+                        let value = e.target.value.replace(/\s/g, '');
+                        let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+                        e.target.value = formattedValue;
+                    });
+                }
+                
+                // Format expiry date (only if element exists)
+                const expiryDateInput = document.getElementById('expiryDate');
+                if (expiryDateInput) {
+                    expiryDateInput.addEventListener('input', function(e) {
+                        let value = e.target.value.replace(/\D/g, '');
+                        if (value.length >= 2) {
+                            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                        }
+                        e.target.value = value;
+                    });
+                }
+                
+                // Handle form submission
+                const checkoutForm = document.getElementById('checkoutForm');
+                if (checkoutForm) {
+                    checkoutForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        processPayment();
+                    });
+                }
+            }, 200);
+        });
+        
+        function displayOrderSummary() {
+            const orderItems = document.getElementById('orderItems');
+            const orderTotals = document.getElementById('orderTotals');
+            const checkoutContainer = document.getElementById('checkoutContainer');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            
+            // Get latest cart from script.js or localStorage
+            let cartToUse = [];
+            if (typeof window.cart !== 'undefined' && window.cart.length > 0) {
+                cartToUse = window.cart;
+                checkoutCart = window.cart; // Keep in sync
+            } else if (checkoutCart.length > 0) {
+                cartToUse = checkoutCart;
+            } else {
+                // Load from localStorage
+                try {
+                    const savedCart = localStorage.getItem('benichem_cart');
+                    if (savedCart) {
+                        cartToUse = JSON.parse(savedCart);
+                        checkoutCart = cartToUse;
+                    }
+                } catch (e) {
+                    cartToUse = [];
+                }
+            }
+            
+            if (cartToUse.length === 0) {
+                checkoutContainer.style.display = 'none';
+                emptyCartMessage.style.display = 'block';
+                return;
+            }
+            
+            checkoutContainer.style.display = 'grid';
+            emptyCartMessage.style.display = 'none';
+            
+            // Display order items
+            orderItems.innerHTML = '';
+            cartToUse.forEach(item => {
+                const orderItem = document.createElement('div');
+                orderItem.className = 'order-item';
+                orderItem.innerHTML = `
+                    <div class="order-item-info">
+                        <div class="order-item-name">${item.name}</div>
+                        <div class="order-item-details">Quantity: ${item.quantity} × £${item.price.toFixed(2)}</div>
+                    </div>
+                    <div class="order-item-price">£${(item.price * item.quantity).toFixed(2)}</div>
+                `;
+                orderItems.appendChild(orderItem);
+            });
+            
+            // Calculate totals
+            const subtotal = cartToUse.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shipping = 0.00; // Free shipping
+            const vat = subtotal * 0.20; // 20% VAT
+            const total = subtotal + shipping + vat;
+            
+            orderTotals.innerHTML = `
+                <div class="total-row">
+                    <span>Subtotal:</span>
+                    <span>£${subtotal.toFixed(2)}</span>
+                </div>
+                <div class="total-row">
+                    <span>Shipping:</span>
+                    <span>£${shipping.toFixed(2)}</span>
+                </div>
+                <div class="total-row">
+                    <span>VAT (20%):</span>
+                    <span>£${vat.toFixed(2)}</span>
+                </div>
+                <div class="total-row final">
+                    <span>Total:</span>
+                    <span>£${total.toFixed(2)}</span>
+                </div>
+            `;
+        }
+        
+        function processPayment() {
+            // Get latest cart from script.js
+            let cartToUse = [];
+            if (typeof window.cart !== 'undefined' && window.cart.length > 0) {
+                cartToUse = window.cart;
+            } else if (typeof loadCartFromStorage === 'function') {
+                loadCartFromStorage();
+                if (typeof window.cart !== 'undefined') {
+                    cartToUse = window.cart;
+                }
+            } else {
+                // Fallback: load from localStorage
+                try {
+                    const savedCart = localStorage.getItem('benichem_cart');
+                    if (savedCart) {
+                        cartToUse = JSON.parse(savedCart);
+                    }
+                } catch (e) {
+                    console.error('Error loading cart:', e);
+                }
+            }
+            
+            if (cartToUse.length === 0) {
+                if (typeof showNotification === 'function') {
+                    showNotification('Your cart is empty. Please add items before checkout.');
+                } else {
+                    alert('Your cart is empty. Please add items before checkout.');
+                }
+                return;
+            }
+            
+            // Validate form
+            const form = document.getElementById('checkoutForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            // Validate card details if payment method is card
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+            if (!paymentMethod) {
+                alert('Please select a payment method.');
+                return;
+            }
+            
+            if (paymentMethod.value === 'card') {
+                const cardNumberEl = document.getElementById('cardNumber');
+                const cardNameEl = document.getElementById('cardName');
+                const expiryDateEl = document.getElementById('expiryDate');
+                const cvvEl = document.getElementById('cvv');
+                
+                if (!cardNumberEl || !cardNameEl || !expiryDateEl || !cvvEl) {
+                    alert('Card details fields are missing. Please refresh the page.');
+                    return;
+                }
+                
+                const cardNumber = cardNumberEl.value.replace(/\s/g, '');
+                const cardName = cardNameEl.value;
+                const expiryDate = expiryDateEl.value;
+                const cvv = cvvEl.value;
+                
+                if (!cardNumber || cardNumber.length < 13) {
+                    alert('Please enter a valid card number.');
+                    return;
+                }
+                if (!cardName || cardName.trim() === '') {
+                    alert('Please enter the name on card.');
+                    return;
+                }
+                if (!expiryDate || expiryDate.length !== 5) {
+                    alert('Please enter a valid expiry date (MM/YY).');
+                    return;
+                }
+                if (!cvv || cvv.length < 3) {
+                    alert('Please enter a valid CVV.');
+                    return;
+                }
+            }
+            
+            // Get form values safely
+            const fullNameEl = document.getElementById('fullName');
+            const emailEl = document.getElementById('email');
+            const phoneEl = document.getElementById('phone');
+            const addressEl = document.getElementById('address');
+            const cityEl = document.getElementById('city');
+            const postcodeEl = document.getElementById('postcode');
+            const countryEl = document.getElementById('country');
+            const notesEl = document.getElementById('notes');
+            
+            if (!fullNameEl || !emailEl || !phoneEl || !addressEl || !cityEl || !postcodeEl || !countryEl) {
+                alert('Some form fields are missing. Please refresh the page.');
+                return;
+            }
+            
+            // Save order details immediately
+            const orderData = {
+                items: cartToUse,
+                customerInfo: {
+                    name: fullNameEl.value,
+                    email: emailEl.value,
+                    phone: phoneEl.value,
+                    address: addressEl.value,
+                    city: cityEl.value,
+                    postcode: postcodeEl.value,
+                    country: countryEl.value,
+                    paymentMethod: paymentMethod.value,
+                    notes: notesEl ? notesEl.value : ''
+                },
+                total: (cartToUse.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 1.20) + 0.00, // subtotal + VAT + shipping
+                date: new Date().toISOString()
+            };
+            
+            // Save order to localStorage
+            localStorage.setItem('benichem_order', JSON.stringify(orderData));
+            
+            // Clear cart
+            checkoutCart = [];
+            if (typeof window.cart !== 'undefined') {
+                window.cart = [];
+            }
+            if (typeof saveCartToStorage === 'function') {
+                saveCartToStorage();
+            } else {
+                localStorage.setItem('benichem_cart', JSON.stringify([]));
+            }
+            
+            // Immediately redirect to confirmation page - no delays, no messages
+            window.location.href = 'order-confirmation.html';
+        }
+        
+        // Make functions globally accessible
+        window.displayOrderSummary = displayOrderSummary;
+        window.processPayment = processPayment;
+    </script>
+</body>
+</html>
+

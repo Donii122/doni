@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore BeniChem's Professional Equipment including pressure washer trolleys, pumps, reduction gearboxes, and accessories. Heavy-duty equipment for commercial use.">
+    <meta name="keywords" content="professional equipment, pressure washers, pumps, gearboxes, industrial equipment">
+    <meta property="og:title" content="Professional Equipment - BeniChem">
+    <meta property="og:description" content="Heavy-duty professional equipment for commercial and industrial applications">
+    <meta property="og:image" content="https://tse4.mm.bing.net/th/id/OIP.U_VcHSF9y-ucte7Oc5bB5gHaGq?rs=1&pid=ImgDetMain&o=7&rm=3">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Professional Equipment - BeniChem</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="col-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX'); // Replace XXXXXXXXXX with your Google Analytics ID
+    </script>
+</head>
+<body class="col-page">
+    <!-- Promo bar (same as index) -->
+    <div class="promo-bar">
+        <div class="container">
+            <div class="promo-bar-content">
+                <span><i class="fas fa-truck"></i> Free delivery on orders over £65</span>
+                <span><i class="fas fa-clock"></i> 2–3 working day delivery</span>
+                <span><i class="fas fa-phone-alt"></i> Expert support</span>
+            </div>
+        </div>
+    </div>
+    <script>
+    (function addProductJsonLd(){
+      function build(){
+        if (!window.products) return;
+        const categories = ['Pressure Washer Trolleys & Spares','Pump Spares','Reduction Gearboxes','Staff Uniform','Jetwash Pumps','Tanks Frames & Holders','Hydraulic Adaptors','Interpump Spares'];
+        const items = products.filter(p => categories.includes(p.category)).slice(0,8);
+        if (!items.length) return;
+        const itemList = items.map((p, i) => ({
+          "@type": "Product",
+          "name": p.name,
+          "image": p.image,
+          "description": p.description,
+          "sku": String(p.id),
+          "offers": {"@type":"Offer","price":p.price,"priceCurrency":"GBP"}
+        }));
+        const ld = {"@context":"https://schema.org","@type":"ItemList","itemListElement": itemList.map((it,i)=>({"@type":"ListItem","position":i+1,"item":it}))};
+        const s = document.createElement('script'); s.type='application/ld+json'; s.textContent = JSON.stringify(ld);
+        document.head.appendChild(s);
+      }
+      if (window.products) build(); else window.addEventListener('load', build);
+    })();
+    </script>    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="logo" style="display: flex; align-items: center; gap: 10px;">
+                        <img loading="lazy" src="https://tse4.mm.bing.net/th/id/OIP.U_VcHSF9y-ucte7Oc5bB5gHaGq?rs=1&pid=ImgDetMain&o=7&rm=3" alt="BeniChem Logo" style="height: 2.5rem; width: auto; object-fit: contain; vertical-align: middle;">
+                        <h1><a href="index.html" style="text-decoration: none; color: inherit;">BeniChem</a></h1>
+                    </div>
+                    <div class="header-actions">
+                        <div class="search-bar">
+                            <input type="text" placeholder="Search Professional Equipment..." id="searchInput">
+                            <button type="button" onclick="filterProducts()"><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="cart-info">
+                            <div class="cart-total-display" id="cartTotalHeader">£0.00</div>
+                            <div class="cart-icon" id="cartIcon" onclick="toggleCart()">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count" id="cartCount">0</span>
+                            </div>
+                        </div>
+                        <div class="user-actions">
+                            <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navMenu" onclick="toggleMenu()">
+                                <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+                                <span class="sr-only">Open menu</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="index.html" class="nav-link anim-text">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link anim-text">Products <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-content">
+                                <div class="dropdown-column">
+                                    <h3>Industrial Equipment</h3>
+                                    <ul>
+                                        <li><a href="col1-industrial.html">Air Fresheners</a></li>
+                                        <li><a href="col1-industrial.html">Couplings & Housings</a></li>
+                                        <li><a href="col1-industrial.html">Electric Motors</a></li>
+                                        <li><a href="col1-industrial.html">Electricals</a></li>
+                                        <li><a href="col1-industrial.html">Low Pressure Hose</a></li>
+                                        <li><a href="col1-industrial.html">Pressure Switches</a></li>
+                                        <li><a href="col1-industrial.html">Petrol Engine Pressure Washers</a></li>
+                                        <li><a href="col1-industrial.html">Silicones</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h3>Cleaning Supplies</h3>
+                                    <ul>
+                                        <li><a href="col2-cleaning.html">Chemicals</a></li>
+                                        <li><a href="col2-cleaning.html">Trigger Guns</a></li>
+                                        <li><a href="col2-cleaning.html">Triggers and Lances</a></li>
+                                        <li><a href="col2-cleaning.html">Unloader Valves</a></li>
+                                        <li><a href="col2-cleaning.html">Vacuums & Spares</a></li>
+                                        <li><a href="col2-cleaning.html">Filters</a></li>
+                                        <li><a href="col2-cleaning.html">Fuel Nozzles</a></li>
+                                        <li><a href="col2-cleaning.html">Jet Wash Hose Assemblies</a></li>
+                                        <li><a href="col2-cleaning.html">Jetwash Nozzles</a></li>
+                                        <li><a href="col2-cleaning.html">Lances</a></li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h3>Professional Equipment</h3>
+                                    <ul>
+                                        <li><a href="col3-professional.html" class="active">Pressure Washer Trolleys & Spares</a></li>
+                                        <li><a href="col3-professional.html">Pump Spares</a></li>
+                                        <li><a href="col3-professional.html">Reduction Gearboxes</a></li>
+                                        <li><a href="col3-professional.html">Staff Uniform</a></li>
+                                        <li><a href="col3-professional.html">Jetwash Pumps</a></li>
+                                        <li><a href="col3-professional.html">Tanks Frames & Holders</a></li>
+                                        <li><a href="col3-professional.html">Hydraulic Adaptors</a></li>
+                                        <li><a href="col3-professional.html">Interpump Spares</a></li>
+                                        <li><a href="col3-professional.html">Accessories</a></li>
+                                        <li><a href="col3-professional.html">Interpumps</a></li>
+                                        <li><a href="col3-professional.html">Polish and Mopping Machines</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link anim-text">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar" aria-hidden="true" role="dialog" aria-label="Shopping cart">
+        <div class="cart-header">
+            <h3>Cart</h3>
+            <button class="close-cart" onclick="toggleCart()" aria-label="Close cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total: <span id="cartTotal">£0.00</span></span>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-overlay" onclick="closeProductModal()"></div>
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeProductModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="product-detail" id="productDetail">
+                <!-- Product details will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1>Professional Equipment</h1>
+                <p>Heavy-duty professional equipment for commercial and industrial use</p>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a> &gt; <span>Professional Equipment</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Category Overview -->
+            <div class="category-overview">
+                <div class="container">
+                    <h2 class="section-title">Browse subcategories</h2>
+                    <div class="category-grid">
+                        <div class="category-card" onclick="filterByCategory('Pressure Washer Trolleys & Spares')">
+                            <i class="fas fa-dolly category-card-icon"></i>
+                            <h3>Pressure Washer Trolleys & Spares</h3>
+                            <p>Mobile trolley systems and replacement parts</p>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Pump Spares')">
+                            <i class="fas fa-cog category-card-icon"></i>
+                            <h3>Pump Spares</h3>
+                            <p>High-pressure pump components and spares</p>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Reduction Gearboxes')">
+                            <i class="fas fa-gears category-card-icon"></i>
+                            <h3>Reduction Gearboxes</h3>
+                            <p>Heavy-duty gear reduction systems</p>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Staff Uniform')">
+                            <i class="fas fa-user-tie category-card-icon"></i>
+                            <h3>Staff Uniform</h3>
+                            <p>Professional workwear and safety equipment</p>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Jetwash Pumps')">
+                            <i class="fas fa-tint category-card-icon"></i>
+                            <h3>Jetwash Pumps</h3>
+                            <p>High-pressure jetwash pump systems</p>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Tanks Frames & Holders')">
+                            <i class="fas fa-cube category-card-icon"></i>
+                            <h3>Tanks Frames & Holders</h3>
+                            <p>Storage tanks and mounting systems</p>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Hydraulic Adaptors')">
+                            <i class="fas fa-link category-card-icon"></i>
+                            <h3>Hydraulic Adaptors</h3>
+                            <p>Hydraulic connection and adaptor systems</p>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Interpump Spares')">
+                            <i class="fas fa-wrench category-card-icon"></i>
+                            <h3>Interpump Spares</h3>
+                            <p>Genuine Interpump replacement parts</p>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Accessories')">
+                            <i class="fas fa-tools category-card-icon"></i>
+                            <h3>Accessories</h3>
+                            <p>Essential accessories and add-ons</p>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Interpumps')">
+                            <i class="fas fa-industry category-card-icon"></i>
+                            <h3>Interpumps</h3>
+                            <p>Professional Interpump pressure systems</p>
+                        </div>
+                        <div class="category-card" onclick="filterByCategory('Polish and Mopping Machines')">
+                            <i class="fas fa-broom category-card-icon"></i>
+                            <h3>Polish and Mopping Machines</h3>
+                            <p>Floor care and maintenance equipment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Professional Equipment</h4>
+                    <ul>
+                        <li><a href="#">Jetwash Pumps</a></li>
+                        <li><a href="#">Pump Spares</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Interpumps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="col1-industrial.html">Industrial Equipment</a></li>
+                        <li><a href="col2-cleaning.html">Cleaning Supplies</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Technical Support</a></li>
+                        <li><a href="#">Installation Guide</a></li>
+                        <li><a href="#">Maintenance</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Find Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Email">
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 All rights Reserved. Design by BeniChem!</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="col3-script.js"></script>
+</body>
+</html>

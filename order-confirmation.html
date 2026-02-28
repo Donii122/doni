@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - BeniChem</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        
+        .confirmation-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .confirmation-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 4px 15px rgba(39,174,96,0.3);
+        }
+        
+        .success-icon i {
+            font-size: 50px;
+            color: white;
+        }
+        
+        .confirmation-card h1 {
+            color: #27ae60;
+            margin-bottom: 15px;
+            font-size: 36px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .confirmation-card p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .order-details {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: left;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .order-details h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .order-details h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+        
+        .detail-row:hover {
+            background: rgba(255,255,255,0.5);
+            padding-left: 10px;
+            border-radius: 4px;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .detail-value {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #007cba 0%, #005a8a 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,124,186,0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #005a8a 0%, #003d5c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,124,186,0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            border: 2px solid #dee2e6;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .confirmation-container {
+                margin: 30px auto;
+                padding: 0 15px;
+            }
+            
+            .confirmation-card {
+                padding: 30px 20px;
+            }
+            
+            .confirmation-card h1 {
+                font-size: 28px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="logo" style="display: flex; align-items: center; gap: 10px;">
+                        <img loading="lazy" src="https://tse4.mm.bing.net/th/id/OIP.U_VcHSF9y-ucte7Oc5bB5gHaGq?rs=1&pid=ImgDetMain&o=7&rm=3" alt="BeniChem Logo" style="height: 2.5rem; width: auto; object-fit: contain; vertical-align: middle;">
+                        <h1><a href="index.html" style="text-decoration: none; color: inherit;">BeniChem</a></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="confirmation-container">
+            <div class="confirmation-card">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h1>Order Confirmed!</h1>
+                <p>Thank you for your order. We've received your order and will process it shortly.</p>
+                
+                <div class="order-details" id="orderDetails">
+                    <!-- Order details will be loaded here -->
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="index.html?clearCart=true" class="btn btn-primary" onclick="clearCartAndRedirect(event)">
+                        <i class="fas fa-home"></i> Continue Shopping
+                    </a>
+                    <a href="#" class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print Receipt
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="col1-industrial.html">Industrial Equipment</a></li>
+                        <li><a href="col2-cleaning.html">Cleaning Supplies</a></li>
+                        <li><a href="col3-professional.html">Professional Equipment</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BeniChem. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to clear cart and redirect
+        function clearCartAndRedirect(event) {
+            // Clear cart from localStorage
+            localStorage.setItem('benichem_cart', JSON.stringify([]));
+            
+            // Clear cart from window object if it exists
+            if (typeof window.cart !== 'undefined') {
+                window.cart = [];
+            }
+            
+            // Allow the link to proceed normally
+            // No need to preventDefault() - let it navigate naturally
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderData = JSON.parse(localStorage.getItem('benichem_order'));
+            const orderDetails = document.getElementById('orderDetails');
+            
+            if (orderData) {
+                const totalItems = orderData.items.reduce((sum, item) => sum + item.quantity, 0);
+                const orderDate = new Date(orderData.date).toLocaleDateString('en-GB', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                orderDetails.innerHTML = `
+                    <h2>Order Details</h2>
+                    <div class="detail-row">
+                        <span class="detail-label">Order Number:</span>
+                        <span class="detail-value">#${Date.now().toString().slice(-8)}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Order Date:</span>
+                        <span class="detail-value">${orderDate}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Items:</span>
+                        <span class="detail-value">${totalItems} item(s)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Total Amount:</span>
+                        <span class="detail-value">£${orderData.total.toFixed(2)}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Payment Method:</span>
+                        <span class="detail-value">${orderData.customerInfo.paymentMethod.charAt(0).toUpperCase() + orderData.customerInfo.paymentMethod.slice(1)}</span>
+                    </div>
+                    ${orderData.cardNumberMasked ? `
+                    <div class="detail-row">
+                        <span class="detail-label">Card Number:</span>
+                        <span class="detail-value">${orderData.cardNumberMasked}</span>
+                    </div>
+                    ` : ''}
+                    <div class="detail-row">
+                        <span class="detail-label">Shipping Address:</span>
+                        <span class="detail-value">${orderData.customerInfo.address}, ${orderData.customerInfo.city}, ${orderData.customerInfo.postcode}</span>
+                    </div>
+                `;
+            } else {
+                orderDetails.innerHTML = '<p>Order information not found.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
+

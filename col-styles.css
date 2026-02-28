@@ -1,0 +1,222 @@
+/* Unified Col Pages (Industrial, Cleaning, Professional) - Same layout and professional styling */
+
+/* Page Header - same navy as main site, with depth */
+.page-header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 40%, #2d5a87 70%, #1e3a5f 100%);
+    color: white;
+    padding: 64px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(0,0,0,0.15), transparent 50%);
+    pointer-events: none;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="g" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.04)"/></pattern></defs><rect width="100" height="100" fill="url(%23g)"/></svg>');
+    pointer-events: none;
+}
+
+.page-header .container {
+    position: relative;
+    z-index: 2;
+}
+
+.page-header-content h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.page-header-content p {
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+    opacity: 0.95;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.breadcrumb a {
+    color: rgba(255,255,255,0.95);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Category Overview - professional card grid with soft background */
+.category-overview {
+    padding: 48px 0 56px;
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.97) 0%, rgba(241, 245, 249, 0.95) 100%);
+    position: relative;
+}
+.category-overview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='2' cy='2' r='0.5' fill='%231e3a5f' fill-opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+.category-overview .container {
+    position: relative;
+    z-index: 1;
+}
+
+.category-overview .section-title {
+    margin-bottom: 32px;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.category-overview .category-card {
+    background: #fff;
+    padding: 28px 20px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.category-overview .category-card:hover {
+    border-color: #1e3a5f;
+    box-shadow: 0 8px 24px rgba(30,58,95,0.12);
+    transform: translateY(-2px);
+}
+
+.category-overview .category-card.active {
+    background: #1e3a5f;
+    border-color: #1e3a5f;
+    color: white;
+}
+
+.category-overview .category-card.active h3,
+.category-overview .category-card.active p,
+.category-overview .category-card.active .category-card-icon {
+    color: white;
+}
+
+.category-overview .category-card .category-card-icon,
+.category-overview .category-card i {
+    font-size: 2.25rem;
+    color: #1e3a5f;
+    margin-bottom: 14px;
+    display: block;
+}
+
+.category-overview .category-card h3 {
+    font-size: 1.05rem;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.category-overview .category-card p {
+    color: #64748b;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Product grid accents - same navy */
+.products-grid .product-card {
+    border-left: 4px solid #1e3a5f;
+}
+
+.products-grid .product-card:hover {
+    border-left-color: #152a45;
+    box-shadow: 0 6px 20px rgba(30,58,95,0.1);
+}
+
+.products-grid .product-category {
+    background: #1e3a5f;
+}
+
+.products-grid .add-to-cart-btn {
+    background: #1e3a5f;
+}
+
+.products-grid .add-to-cart-btn:hover {
+    background: #152a45;
+}
+
+/* Filter buttons */
+.category-filters button:hover,
+.category-filters button.active {
+    background: #1e3a5f;
+    color: white;
+    border-color: #1e3a5f;
+}
+
+/* Col main content area - beautiful gradient background */
+.col-page .main-content {
+    padding-bottom: 48px;
+    background: linear-gradient(180deg, transparent 0%, rgba(226, 232, 240, 0.4) 100%);
+    position: relative;
+}
+.col-page .main-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='3' cy='3' r='0.5' fill='%2394a3b8' fill-opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+.col-page .main-content > .container {
+    position: relative;
+    z-index: 1;
+}
+
+.col-page .category-overview {
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 48px 0;
+    }
+    .page-header-content h1 {
+        font-size: 1.75rem;
+    }
+    .page-header-content p {
+        font-size: 1rem;
+    }
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+    }
+    .category-overview .category-card {
+        padding: 22px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header {
+        padding: 40px 0;
+    }
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+}
