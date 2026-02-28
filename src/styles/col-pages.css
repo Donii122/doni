@@ -1,0 +1,155 @@
+/* Unified Col Pages (Industrial, Cleaning, Professional) */
+
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, var(--navy) 0%, #2a4494 50%, var(--blue) 100%);
+    color: white;
+    padding: 64px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.page-header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: 0; right: 0;
+    height: 60px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23f7f9fc' d='M0,30 C480,60 960,0 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E") no-repeat bottom center/100% auto;
+    pointer-events: none;
+}
+.page-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(112,148,224,0.25) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(112,148,224,0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+.page-header .container { position: relative; z-index: 2; }
+
+.page-header-content h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 12px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+.page-header-content p {
+    font-size: 1.05rem;
+    margin-bottom: 16px;
+    opacity: 0.9;
+}
+
+.breadcrumb { font-size: 0.9rem; opacity: 0.85; }
+.breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+/* Category Overview */
+.category-overview {
+    padding: 48px 0 56px;
+    background: var(--off-white);
+    position: relative;
+}
+.category-overview .section-title { margin-bottom: 32px; }
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.category-overview .category-card {
+    background: white;
+    padding: 28px 20px;
+    border-radius: var(--radius);
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    border: 1px solid var(--light-grey);
+    box-shadow: var(--shadow-sm);
+}
+.category-overview .category-card:hover {
+    border-color: var(--blue);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+.category-overview .category-card.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: white;
+}
+.category-overview .category-card.active h3,
+.category-overview .category-card.active p,
+.category-overview .category-card.active .category-card-icon {
+    color: white;
+}
+.category-overview .category-card .category-card-icon,
+.category-overview .category-card i {
+    font-size: 2.25rem;
+    color: var(--blue);
+    margin-bottom: 14px;
+    display: block;
+}
+.category-overview .category-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.category-overview .category-card p {
+    color: var(--grey);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Product grid accents */
+.col-page .products-grid .product-card {
+    border-left: 4px solid var(--blue);
+}
+.col-page .products-grid .product-card:hover {
+    border-left-color: var(--navy);
+}
+.col-page .products-grid .product-category {
+    background: var(--navy);
+}
+.col-page .products-grid .add-to-cart-btn {
+    background: var(--navy);
+}
+.col-page .products-grid .add-to-cart-btn:hover {
+    background: var(--blue);
+}
+
+/* Filter buttons */
+.col-page .category-filters button:hover,
+.col-page .category-filters button.active {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+}
+
+/* Col main content */
+.col-page .main-content {
+    padding-bottom: 48px;
+    background: var(--off-white);
+}
+.col-page .category-overview { margin-bottom: 0; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header { padding: 48px 0; }
+    .page-header-content h1 { font-size: 1.8rem; }
+    .page-header-content p { font-size: 1rem; }
+    .category-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+    }
+    .category-overview .category-card { padding: 22px 16px; }
+}
+
+@media (max-width: 480px) {
+    .page-header { padding: 40px 0; }
+    .category-grid { grid-template-columns: 1fr; }
+}
