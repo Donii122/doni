@@ -3651,3 +3651,43 @@ function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
+
+// Best Sellers Carousel
+function renderBestSellers(count) {
+    count = count || 8;
+    var carousel = document.getElementById('bestsellersCarousel');
+    if (!carousel) return;
+    var productsArray = window.products || products;
+    var sorted = productsArray.slice().sort(function(a, b) {
+        if ((b.popularity || 0) !== (a.popularity || 0)) return (b.popularity || 0) - (a.popularity || 0);
+        return (b.rating || 0) - (a.rating || 0);
+    });
+    var best = sorted.slice(0, count);
+    carousel.innerHTML = '';
+    best.forEach(function(product) {
+        var card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = '<div class="product-image" onclick="showProduct(' + product.id + ')" style="cursor:pointer">' +
+            '<img src="' + getProductImageUrl(product) + '" alt="' + product.name + '">' +
+            '<span class="product-category">' + product.category + '</span>' +
+            '</div>' +
+            '<div class="product-details">' +
+            '<h3 class="product-title" onclick="showProduct(' + product.id + ')" style="cursor:pointer">' + product.name + '</h3>' +
+            '<div class="product-price">' + formatPrice(product.price) + ' exc. VAT</div>' +
+            '<button class="add-to-cart-btn" onclick="addToCart(' + product.id + ')">Add to Basket</button>' +
+            '</div>';
+        carousel.appendChild(card);
+    });
+}
+
+function scrollCarousel(direction) {
+    var carousel = document.getElementById('bestsellersCarousel');
+    if (!carousel) return;
+    var scrollAmount = 310;
+    carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+}
+
+// Render best sellers on page load
+document.addEventListener('DOMContentLoaded', function() {
+    renderBestSellers(8);
+});
